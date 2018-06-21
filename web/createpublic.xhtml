@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+xmlns:p="http://primefaces.org/ui">
+    <body>
+
+        <ui:composition template="./Template1.xhtml">
+
+            <ui:define name="left">
+                left
+            </ui:define>
+
+            <ui:define name="right">
+                right
+            </ui:define>
+
+            <ui:define name="content">
+                 <p>Enter profile details below.</p>
+                 <br></br>
+        <h:form>
+            
+            
+            <p>
+                <p:inputText class="fields" id="profile_name" value="#{companyProfileBean.profileName}" required="true" maxlength="100" pt:placeholder="Profile Name" />
+            </p>
+            <h:message for="profile_name" style="color:red" />
+            <br></br>
+            
+            <p class="field_paragraph">
+                <p:editor class="fields" id="company_overview" value="#{companyProfileBean.companyOverview}" required="true" maxlength="7000" pt:placeholder="Company Overview" />
+            </p>
+            <h:message for="company_overview" style="color:red" />
+            
+            <p class="field_paragraph">
+                <p:inputTextarea class="fields" id="products" value="#{companyProfileBean.products}" required="true" counter="counter" maxlength="255" counterTemplate="{0} characters remaining." pt:placeholder="Products" />
+            </p>
+            <h:outputText id="counter" />
+            <h:message for="products" style="color:red" />
+            
+            <p class="field_paragraph">
+                <p:inputText class="fields" id="revenue" value="#{companyProfileBean.revenue}" required="true" pt:placeholder="Revenue" />
+            </p>
+            <h:message for="revenue" style="color:red" />
+            
+            <p class="field_paragraph">
+                <p:inputText class="fields" id="revenueDescription" value="#{companyProfileBean.revenueDescription}" required="true" pt:placeholder="Revenue Description" />
+            </p>
+            <h:message for="revenueDescription" style="color:red" />
+            
+            <p class="field_paragraph">
+                <p:inputText class="fields" id="adLine1" value="#{companyProfileBean.addressLine1}" required="true" pt:placeholder="Address Line 1" />
+            </p>
+            <h:message for="adLine1" style="color:red" />
+            
+            <p class="field_paragraph">
+                <p:inputText class="fields" id="adLine2" value="#{companyProfileBean.addressLine2}" required="true" pt:placeholder="Address Line 2" />
+            </p>
+            <h:message for="adLine2" style="color:red" />
+            
+            <p class="field_paragraph">
+                <p:inputText class="fields" id="adLine3" value="#{companyProfileBean.addressLine3}" required="true" pt:placeholder="Address Line 3" />
+            </p>
+            <h:message for="adLine3" style="color:red" />
+            
+            <p class="field_paragraph">
+            <h:selectOneMenu  styleClass="dropdown_menu1" id="city"
+                              value="#{companyProfileBean.city}"
+                             title="Your response">
+                <f:selectItems value="#{companyProfileBean.cityValues}"
+                               var="city"
+                               itemValue="#{city}"
+                               itemLabel="#{city}" />
+            </h:selectOneMenu>
+                </p>
+            <h:message for="city" style="color:red" />
+            
+            <p class="field_paragraph">
+                <p:inputText class="fields" id="adphone" value="#{companyProfileBean.phoneNumber}" required="true" pt:placeholder="Phone Number" />
+            </p>
+            <h:message for="adphone" style="color:red" />
+            
+            
+            
+            
+            
+            <p class="field_paragraph">
+           <h:selectOneMenu  id="select_menu"
+                              value="#{companyProfileBean.selectedZseCompany}"
+                             title="Your response">
+                <f:selectItems value="#{companyProfileBean.zseCompaniesList}"
+                               var="company"
+                               itemValue="#{company}"
+                               itemLabel="#{company.companyName}" />
+            </h:selectOneMenu>
+                </p>
+            <h:message for="select_menu" style="color:red" />
+                
+            <br></br>
+            <p class="submit_paragraph">
+                <h:commandButton class="submit_button" action="#{companyProfileBean.createPublicProfile()}"
+                           value="Submit" />
+            </p>
+            <br/>
+           
+        </h:form>
+        <br />
+        <h:link outcome="index"
+                value="Back to the main page." />
+            </ui:define>
+
+            <ui:define name="bottom">
+                bottom
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
+

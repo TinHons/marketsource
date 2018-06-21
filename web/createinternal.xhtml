@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <body>
+
+        <ui:composition template="./Template1.xhtml">
+
+            <ui:define name="left">
+                left
+            </ui:define>
+
+            <ui:define name="right">
+                right
+            </ui:define>
+
+            <ui:define name="content">
+                <p>Enter article details below.</p>
+                <br></br>
+                <h:form enctype="multipart/form-data">
+
+
+                    <p>
+                        <p:inputText class="fields" id="title" value="#{createArticleBean.title}" required="true" maxlength="230" pt:placeholder="Title" />
+                    </p>
+                    <h:message for="title" style="color:red" />
+                    <br></br>
+                    
+                     <p class="field_paragraph">
+                         <p:inputTextarea class="fields" id="caption" value="#{createArticleBean.articleCaption}" required="true" maxlength="800" pt:placeholder="Caption" />
+                    </p>
+                    <h:message for="caption" style="color:red" />
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <p class="field_paragraph">
+                        <p:editor class="fields" id="articletext" value="#{createArticleBean.articleText}" required="true" maxlength="16777215" pt:placeholder="Article Body" />
+                    </p>
+                    <h:message for="articletext" style="color:red" />
+
+
+
+                    <p class="field_paragraph">
+                        <h:selectOneMenu  styleClass="dropdown_menu1" id="cart"
+                                          value="#{createArticleBean.cartegory}"
+                                          title="Your response">
+                            <f:selectItems value="#{createArticleBean.cartegoryValues}"
+                                           var="cart"
+                                           itemValue="#{cart}"
+                                           itemLabel="#{cart}" />
+                        </h:selectOneMenu>
+                    </p>
+                    <h:message for="cart" style="color:red" />
+
+
+                    <p>
+                        <h:outputLabel for="imagei">Image 1 </h:outputLabel>
+                        <h:inputFile id="image1" value="#{createArticleBean.image1}">
+
+                        </h:inputFile>
+                    </p>
+                    <h:message for="image1" style="color:red" />
+                    <p>
+                         <h:outputLabel for="caption1">Image 1 Caption </h:outputLabel>
+                         <p:inputText id="caption1" value="#{createArticleBean.caption1}" maxlength="7000"  /></p>
+                    <h:message for="caption1" style="color:red" />
+
+                    <p>
+                        <h:outputLabel for="image2">Image 2 </h:outputLabel>
+                        <h:inputFile id="image2" value="#{createArticleBean.image2}">
+
+                        </h:inputFile>
+                    </p>
+                     <h:message for="image2" style="color:red" />
+                    <p>
+                        <h:outputLabel for="caption2">Image 2 Caption </h:outputLabel>
+                        <p:inputText id="caption2" value="#{createArticleBean.caption2}" maxlength="7000"  /></p>
+                    <h:message for="caption2" style="color:red" />
+
+                    <p>
+                        <h:outputLabel for="image3">Image 3 </h:outputLabel>
+                        <h:inputFile id="image3" value="#{createArticleBean.image3}">
+
+                        </h:inputFile>
+                    </p>
+                     <h:message for="image3" style="color:red" />
+                    <p>
+                        <h:outputLabel for="caption3">Image 3 Caption </h:outputLabel>
+                        <p:inputText id="caption3" value="#{createArticleBean.caption3}" maxlength="7000"  /></p>
+                    <h:message for="caption3" style="color:red" />
+
+
+
+
+                    <br></br>
+                    <p class="submit_paragraph">
+                        <h:commandButton class="submit_button" action="#{createArticleBean.createInternalArticle()}"
+                                         value="Submit" />
+                    </p>
+                    <br/>
+
+                </h:form>
+                <br />
+
+            </ui:define>
+
+            <ui:define name="bottom">
+                bottom
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
+
+

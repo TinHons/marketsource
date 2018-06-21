@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:metadata>
+
+
+        <f:viewAction action="#{currenciesUpdateBean.retrieveLatestRates()}"  immediate=""/>
+    </f:metadata>
+
+    <body>
+
+        <ui:composition template="./Template1.xhtml">
+
+            <ui:define name="top">
+                top
+            </ui:define>
+
+            <ui:define name="head-meta">
+                <meta name="description" content="Get the latest international currency rates for all the major currencies."></meta>
+            </ui:define>
+
+            <ui:define name="title">FinZim | Currency Exchange Rates</ui:define>
+
+            <ui:define name="content">
+
+
+                <h4>CURRENCIES</h4>
+                <br/>
+                <p>Currency data as issued by the European Central Bank(ECB) at <h:outputText value="#{currenciesUpdateBean.currencyDate}" ><f:convertDateTime type="date" dateStyle="full" /></h:outputText> 4.00 pm CET. Currency data is based to the USD.</p>
+
+                <h:dataTable class="tables" id="currenciesSheetTable" var="currency1"
+                             summary="List of all responses for Event"
+                             value="#{currenciesUpdateBean.currencyList}">
+                    <h:column>
+                        <f:facet name="header">Name</f:facet>
+                        <h:outputText value="#{currency1.name}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Code</f:facet>
+                        <h:outputText value="#{currency1.code}" />
+                    </h:column>
+
+
+
+                    <h:column>
+                        <f:facet name="header">Rate($1 buys)</f:facet>
+                        <h:outputText value="#{currency1.rate}" />
+
+                    </h:column>
+
+                </h:dataTable>
+                <hr/>
+            </ui:define>
+
+            <ui:define name="bottom">
+                bottom
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

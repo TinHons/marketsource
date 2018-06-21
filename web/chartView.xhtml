@@ -1,0 +1,177 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+
+    <f:metadata>
+        <f:viewParam name="company"  value="#{chartViewBean.company}"/>
+<!--        <f:event listener="#{chartViewBean.createLineModels()}"
+                 type="preRenderView"  />-->
+<!--        <f:viewAction action="#{chartViewBean.createLineModels()}"  immediate=""/>-->
+        <f:viewAction action="#{chartViewBean.retrieveComparisonSelectItems()}"  immediate=""/> 
+        <f:viewAction action="#{chartViewBean.createBarModel()}"  immediate=""/>
+        <f:viewAction action="#{queryManagedBean.retrieveDailyTrades(queryManagedBean.selectedDate)}" onPostback="true"/>
+        <f:viewAction action="#{chartViewBean.retrieveTradeData()}"  immediate=""/>
+        <f:viewAction action="#{chartViewBean.retrieveCompanyProfile()}"  immediate=""/>
+
+    </f:metadata>
+
+    <body>
+
+
+        <ui:composition template="./Template1.xhtml">
+
+            <ui:define name="top">
+                top
+            </ui:define>
+
+            <ui:define name="head-meta">
+                <meta name="description" content="#{chartViewBean.company.companyName} Share Price Chart"></meta>
+            </ui:define>
+
+            <ui:define name="title"><h:outputText value="Finzim | #{chartViewBean.company.companyName} Share Price Chart"/></ui:define>
+
+            <ui:define name="content">
+                <div class="row" style="text-align: center;"><h:outputText class="boardChartTitle" value="#{chartViewBean.company.companyName} Stock Performance"/> </div>
+                <hr/>
+                <br/>
+                <div class="row">
+                    <div class="col-6">
+                        <h:form id="dateForm">
+                            <p:growl id="msgs" showDetail="true" />
+                            <!--                    <p>Showing data for start date indicated. Select a different start date by clicking in the field below and then clicking the submit button.</p>-->
+
+
+
+                            <p:outputLabel for="popup" value="Select Start Date(mm/dd/yy):" />
+                            <br/>
+                            <br/><p class="field_paragraph">
+                                <p:calendar class="boardInputText" id="popup" value="#{chartViewBean.selectedDate}" />
+                            </p>
+                            <br/>
+
+
+
+                            <p:outputLabel for="popup" value="Compare:" />
+                            <br/>
+                            <br/>
+                            <p class="field_paragraph">
+                                <h:selectOneMenu class="ui-inputfield" id="select_menu"
+                                                 value="#{chartViewBean.selectedComparisonItem}"
+                                                 title="Select Comparison Target">
+                                    <f:selectItems value="#{chartViewBean.comparisonList}"
+                                                   var="company"
+                                                   itemValue="#{company}"
+                                                   itemLabel="#{company.companyName}" />
+                                </h:selectOneMenu>
+                            </p>
+                            <h:message for="select_menu" style="color:red" />
+                            <br/>
+                            <p:commandButton class="boardSubmitButton" value="Submit" update="chart" actionListener="#{chartViewBean.createBarModel()}"  icon="ui-icon-check" />
+                        </h:form>
+                    </div>
+                    <div class="col-7">
+
+                        <!--                <p:outputPanel id="chart">
+                                            <p:chart type="line" model="#{chartViewBean.lineModel}" style="height:300px;width: 90%"/>
+                                        </p:outputPanel>-->
+
+                        <p:outputPanel id="chart">
+                            <p:chart class="boardChart" type="bar" model="#{chartViewBean.barModel}" />
+                        </p:outputPanel>
+
+                    </div>
+                    <hr/>
+                </div>
+                <div class="row">
+                    <div class="col-1">
+                        <h:outputText class="sharePrice" value="#{chartViewBean.closingPrice}">
+                            <f:convertNumber currencySymbol="$" type="currency" maxFractionDigits="4" minFractionDigits="2"/>
+                        </h:outputText>
+                        
+                        <br/>
+
+                        <h:outputLabel class="changeIcon" rendered="#{styleBean.showUpArrow(chartViewBean.tradeData.directionIndicator)}" style="color:#{styleBean.getShareChangeColor(chartViewBean.tradeData.directionIndicator)}"><i class="fa fa-arrow-up" style="font-size:200%;"></i></h:outputLabel>
+                        <h:outputLabel rendered="#{styleBean.showDownArrow(chartViewBean.tradeData.directionIndicator)}" style="color:#{styleBean.getShareChangeColor(chartViewBean.tradeData.directionIndicator)}"><i class="fa fa-arrow-down" style="font-size:200%;"></i></h:outputLabel>
+                        <h:outputText class="shareChange" value="#{chartViewBean.absoluteChange}" style="color:#{styleBean.getShareChangeColor(chartViewBean.tradeData.directionIndicator)}">
+                            <f:convertNumber maxFractionDigits="4" minFractionDigits="2"/>
+                        </h:outputText>
+                        <h:outputText class="shareChange" value=" | " ></h:outputText>
+                        <h:outputText class="shareChange" value="#{chartViewBean.percentageChange}" style="color:#{styleBean.getShareChangeColor(chartViewBean.tradeData.directionIndicator)}"> <f:convertNumber pattern="##0.00'%'"/></h:outputText>
+                    </div>
+                    <div class="col-2">
+                        <h:outputText class="dataTableHeaders" value="Market Activity"/> 
+                        <br/>
+                        <br/>
+                        <h:panelGrid  columns="2" id="tradeMetricsTable">
+
+                            
+                            <h:outputText class="dataTableRowItem" value="Volume"/> 
+                            <h:outputText  value="#{chartViewBean.totalSharesTraded}"> 
+                                <f:convertNumber groupingUsed="true"/>
+                            </h:outputText>
+                            <h:outputText class="dataTableRowItem" value="Value"/> 
+                            <h:outputText  value="#{chartViewBean.totalValueTraded}"> 
+                                <f:convertNumber currencySymbol="$" type="currency"/>
+                            </h:outputText>
+                            
+                            <h:outputText class="dataTableRowItem" value="52-week High"/>
+                            <h:outputText  value="#{chartViewBean.high52Week}">
+                                <f:convertNumber currencySymbol="$" type="currency" maxFractionDigits="4" minFractionDigits="2"/>
+                            </h:outputText>
+                            <h:outputText class="dataTableRowItem" value="52-week Low"/>
+                            <h:outputText  value="#{chartViewBean.low52Week}">
+                                <f:convertNumber currencySymbol="$" type="currency" maxFractionDigits="4" minFractionDigits="2"/>
+                            </h:outputText>
+                        </h:panelGrid>
+                    </div>
+                    <div class="col-3">
+                        <h:outputText class="dataTableHeaders" value="Company Information"/>
+                        <br/>
+                        <br/>
+                        <h:panelGrid  columns="2" id="companyInfoTable">
+
+                            <h:outputText class="dataTableRowItem" value="Name"/> 
+                            <h:outputText  value="#{queryCompanyProfileBean.profile.name}"/> 
+                            <h:outputText class="dataTableRowItem" value="ISIN"/> 
+                            <h:outputText value="#{chartViewBean.company.isin}"/> 
+                            <h:outputText class="dataTableRowItem" value="Ticker Code"/> 
+                            <h:outputText value="#{chartViewBean.company.symbol}"/> 
+                            <h:outputText class="dataTableRowItem" value="Stock Exchange"/> 
+                            <h:outputText value="Zimbabwe Stock Exchange"/> 
+
+                        </h:panelGrid>
+                    </div>
+                </div>
+
+                <hr/>
+                
+                <div class="row">
+                    <h:form>
+
+
+                    <h:link value="#{chartViewBean.company.companyName} Profile" outcome="companyprofile" includeViewParams="true">
+                        <f:param name="company" value="#{chartViewBean.company}"/>
+
+                    </h:link>
+                </h:form>
+                </div>
+                <hr/>
+
+                <br/>
+                <hr/>
+            </ui:define>
+
+            <ui:define name="bottom">
+                bottom
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

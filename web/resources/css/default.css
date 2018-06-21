@@ -1,0 +1,888 @@
+/*body {
+    background-color: #ffffff;
+    font-size: 12px;
+    font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    color: #000000;  
+    margin: 10px;
+}
+
+h1 {
+    font-family: Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    border-bottom: 1px solid #AFAFAF; 
+    font-size:  16px;
+    font-weight: bold;
+    margin: 0px;
+    padding: 0px;
+    color: #D20005;
+}
+
+a:link, a:visited {
+  color: #045491;
+  font-weight : bold;
+  text-decoration: none;
+}
+
+a:link:hover, a:visited:hover  {
+  color: #045491;
+  font-weight : bold;
+  text-decoration : underline;
+}*/
+body
+{
+    /*margin: 2px 0px 0px 0px;*/
+    margin: 2px 0px 0px 0px;
+    padding:0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+* {
+    font-family: "Times New Roman",Times, serif;
+  }
+
+.sidesection {
+    width: 30%;
+    float: left;
+    padding: 15px;
+    border-right:  1px solid grey;
+}
+.main {
+    width: 70%;
+    float: left;
+    padding: 15px;
+    border-right:  1px solid grey;
+    /*    added to make table fit in the div*/
+    display:table;
+}
+
+@media only screen and (max-width: 600px) {
+    .sidesection {
+        display: none;
+    }
+    .main {
+        width: 100%;
+
+    }
+
+    .center {
+        margin: auto;
+        width: 100%;
+        /*   border: 1px solid green;
+            border-radius: 25px;*/
+        /*    padding: 10px;*/
+    }
+
+
+}
+
+h4 {
+    font-family: Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    border-bottom: 1px solid #AFAFAF; 
+    font-size:  16px;
+    font-weight: bolder;
+    margin: 0px;
+    padding: 0px;
+    /*    color: #D20005;*/
+    color: grey;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+
+
+
+
+
+
+}
+
+td, th {
+    /*    border: 1px solid #dddddd;*/
+    text-align: left;
+    padding: 8px;
+
+
+}
+
+
+
+tr:nth-child(even) {
+    /*    background-color: #dddddd;*/
+}
+
+.center {
+    margin: auto;
+    width: 70%;
+    /*   border: 1px solid green;
+        border-radius: 25px;*/
+    /*    padding: 10px;*/
+}
+.topGainersTable{
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    width: 100%;
+    font-size: 90%;
+
+}
+.topGainersTable td{
+    border-bottom: 1px solid lightgrey;
+}
+
+.topGainersTable tr:hover {background-color: lightgrey;}
+
+.majorCurrenciesTable{
+
+    width: 100%;
+    font-size: 90%;
+
+}
+
+
+
+table#navigationTable {
+    position: relative;
+    /*    background-color: #ece3a5;
+        padding: 5px;
+        width: 150px;*/
+
+    bottom:0;
+
+    margin-left:10px; 
+    margin-right:auto;
+
+    text-align: center;
+
+    font-size: 90%;
+
+    width: 30%;
+
+    display: inline-block;
+
+
+
+
+}
+
+table#aboutUsTable {
+    position: relative;
+    /*    background-color: #ece3a5;
+        padding: 5px;
+        width: 150px;*/
+
+    bottom:0;
+
+    margin-left:auto; 
+    margin-right:auto;
+
+    text-align: center;
+
+    font-size: 90%;
+
+    width: 60%;
+
+}
+
+
+
+table#navigationTable td {
+    border-right: 1px solid;
+    border-left: none;
+    border-top: none;
+    border-bottom: none;
+
+
+
+}
+
+table#priceSheetTable  {
+    border-top: solid;
+
+
+
+
+}
+
+table#priceSheetTable td,th {
+    border-bottom:1px solid #dddddd ;
+
+
+
+
+}
+
+.indicesTable{
+
+
+
+    border-top: 1px solid;
+
+    border-bottom: 1px solid;
+
+    width: 100%;
+
+    font-size: 120%;
+
+
+
+
+}
+
+.indicesTable td{
+    border-bottom: 1px solid lightgrey;
+}
+
+.indicesTable tr:hover {background-color: lightgrey;}
+
+.sharePriceTable{
+    border-top: 1px solid;
+    font-size: 90%;
+
+
+}
+.sharePriceTable td{
+
+    border-bottom: 1px solid lightgrey;
+
+}
+
+.sharePriceTable tr:hover {background-color: lightgrey;}
+
+.sharePriceTableLinks{
+
+}
+a.sharePriceTableLinks:link{
+
+    color: #0080ff;
+
+    text-decoration: none;
+
+}
+
+
+
+
+@media only screen and (max-width: 600px) {
+
+    .sharePriceTable{
+
+        font-size: 100%;
+
+    }
+
+}
+
+.indicesTableLinks{
+
+}
+a.indicesTableLinks:link{
+
+    color: #0080ff;
+
+    text-decoration: none;
+
+}
+
+a.indicesTableLinks:hover{
+
+
+
+    text-decoration: none;
+    color: grey;
+}
+
+
+
+.articleHeadingsTable{
+    font-family: arial, sans-serif;
+
+    color: black;
+
+
+}
+
+.articleHeadingsTable{
+
+
+}
+
+.articleHeadingsTable a:link{
+
+    color: black;
+}
+
+.articleHeadingsTable tr:nth-child(even){
+
+    background-color: white;
+}
+
+
+.jqplot-table-legend {
+    /*    display: none;*/
+    max-width:80%;
+
+}
+.jqplot-table-legend tr:nth-child(even) {background-color: white;}
+
+
+.center{
+
+    text-align: center;
+}
+
+.center_block{
+
+    margin-left: auto;
+    margin-right: auto;
+    display:block;
+}
+
+
+
+.headline{
+    /*font-family: arial, sans-serif;*/
+    /*font-family: Times, "Times New Roman", serif;*/
+    /*    font-style: italic;*/
+    font-size: 200%;
+    /*    text-transform: uppercase;*/
+
+    color: black;
+    font-weight: bold;
+}
+
+a.headline:link{
+
+    font-size: 200%;
+    font-weight: bold;
+    text-decoration: none;
+
+}
+
+a.headline:hover{
+
+    font-size: 200%;
+    font-weight: bold;
+    text-decoration: none;
+    color: grey;
+}
+
+a.headline:visited{
+
+    font-size: 200%;
+    font-weight: bold;
+    text-decoration: none;
+    color: purple;
+}
+
+
+.topNewsHeading{
+/*font-family: Times, "Times New Roman", serif;*/
+    font-size: 200%;
+    font-weight: bold;
+
+}
+
+a.topNewsHeading:link{
+
+    font-size: 200%;
+    font-weight: bold;
+    text-decoration: none;
+
+}
+
+a.topNewsHeading:hover{
+
+    font-size: 200%;
+    font-weight: bold;
+    text-decoration:underline;
+    color: grey;
+}
+
+a.topNewsHeading:visited{
+
+    font-size: 200%;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+}
+
+.articleCaption{
+
+    font-size: 110%; 
+}
+
+
+
+
+
+
+
+@media only screen and (max-width: 600px) {
+    .indicesTable{
+
+
+
+        border-top: solid;
+        width: 100%;
+
+
+    }
+
+    table#aboutUsTable {
+
+
+        width: 100%;
+
+    }
+
+
+
+
+
+
+}
+
+/*social media*/
+
+/*.fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}*/
+
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+}
+
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
+}
+
+.fa-whatsapp {
+
+    color: green;
+}
+
+/*CSS for Investor Board*/
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+[class*="col-"] {
+    float: left;
+    padding: 15px;
+    text-align: center;
+    /*border: 1px solid red;*/
+}
+
+.col-1 {width: 33.33%;}
+.col-2 {width: 33.33%;}
+.col-3 {width: 33.33%;}
+.col-4 {width:50%;border-right: 1px solid;}
+.col-5 {width:50%;}
+.col-6{width:20%;}
+.col-7{width: 80%;}
+
+.sharePrice{
+
+    font-size: 400%;
+
+}
+
+.shareChange{
+
+    font-size: 200%;
+
+}
+
+.dataTableHeaders {
+
+    font-weight: bold;
+
+
+}
+
+.dataTableRowItem{
+    font-weight: bold;
+
+}
+
+.boardSectionHeader{
+
+    text-align: center;
+}
+
+#tradeMetricsTable{
+    border-top: 1px solid black;
+
+}
+
+#tradeMetricsTable tr:nth-child(even) {
+    background-color: white;
+}
+
+#tradeMetricsTable td {
+    border-bottom: 1px solid black;
+}
+
+#tradeMetricsTable tr:hover {background-color: lightgrey;}
+
+#companyInfoTable{
+    border-top: 1px solid black;
+
+}
+
+#companyInfoTable tr:nth-child(even) {
+    background-color: white;
+}
+
+#companyInfoTable td {
+    border-bottom: 1px solid black;
+}
+
+#companyInfoTable tr:hover {background-color: lightgrey;}
+
+#positionsTable{
+    border-top: solid;
+
+
+}
+
+#positionsTable tr:nth-child(even) {
+    background-color: white;
+}
+
+#positionsTable th, td {
+    border-bottom: 1px solid #ddd;
+}
+
+#positionsTable tr:hover {background-color: lightgrey;}
+
+
+.jqplot-highlighter{
+    background-color: white;
+    border: 2px solid lightblue;
+    border-radius: 1px;
+    font-weight: bold;
+    /*    color: blue;*/
+    font-weight: bold;
+}
+
+.jqplot-highlighter tr:nth-child(even) {background-color: white;}
+
+.jqplot-highlighter th, td {
+    border-bottom: none;
+}
+
+.submitButton {
+    background-image:none;
+    background-color: #33ccff;
+
+    color: white;
+    box-shadow: none;
+
+}
+
+.boardChartTitle {
+    background-image:none;
+    /*    background-color: #77b300;*/
+    color: #33ccff;
+    font-size: 200%;
+
+    box-shadow: none;
+
+}
+
+.ui-inputfield{
+
+    box-shadow: none;
+    width: auto;
+
+}
+
+.fillUpWidth{
+    width:100%;
+}
+
+
+
+h3 {
+    text-align: center;
+    font-size: 200%;
+}
+
+.boardChart{
+    height: 450px;
+    width: 100%;
+}
+
+.field_paragraph{
+
+    text-align: center;margin: auto;width: 80%;
+}
+
+.fieldLabels{
+
+    text-align: left;
+}
+
+.highlighterString{
+    color: red;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+
+    .boardChart{
+        height: 450px;
+        width: 100%;
+    }
+
+    .col-1 {width: 100%;}
+    .col-2 {width: 100%;}
+    .col-3 {width: 100%;}
+    .col-4 {width:100%;border-right: 1px solid;}
+    .col-5 {width:100%;}
+    .col-6{width:100%;}
+    .col-7{width: 100%;}
+}
+
+/*Navigation Bar CSS*/
+
+.navList {
+
+
+    background-color: black;
+    width: 100%;
+    margin: 0;
+    padding: 0px;
+    overflow: hidden;
+
+
+}
+.navList2 {
+
+    background-color: blue;
+
+    border-bottom:  1px solid #bbb;
+    width: 100%;
+    margin: 0;
+    padding: 0px;
+    overflow: hidden;
+}
+
+.navList3 {
+
+
+    display:none;
+    border-bottom:  1px solid #bbb;
+    width: 100%;
+    margin: 0;
+    padding: 0px;
+    overflow: hidden;
+}
+
+
+li.navElement {
+
+    display: block;
+    float:left;
+    border-right: 1px solid #bbb;
+
+
+
+
+}
+
+.navElement a {
+    display: inline-block;
+
+    /*    background-color: white;*/
+    text-align: center;
+    padding: 14px 16px;
+
+}
+
+
+
+.navElement:hover {
+    background-color: #111;
+    text-decoration: none;
+}
+
+
+
+li.navElementRight{
+    display: block;
+    float:right;
+    /*   color:black;*/
+    border-right: 1px solid #bbb;
+
+}
+
+
+.navElementRight:hover {
+    background-color: #111;
+    text-decoration: none;
+}
+
+li.navElementRight:nth-child(5) {
+
+
+    border-left: 1px solid #bbb;
+    border-right: none;
+
+}
+li.navElementRight:nth-child(6) {
+
+
+    border-left: 1px solid #bbb;
+
+
+}
+
+.navElementRight a {
+    display: inline-block;
+
+    /*    background-color: white;*/
+    text-align: center;
+    padding: 14px 16px;
+
+}
+.navElementRightText {
+    display: inline-block;
+    float: right;
+    /*    background-color: white;*/
+    text-align: center;
+    padding: 14px 16px;
+    border-left: 1px solid #bbb;
+
+}
+
+
+
+
+li.navElementRight2{
+    display: block;
+    float:right;
+    color:black;
+    border-right: 1px solid #bbb;
+}
+
+
+
+
+li.navElement2{
+
+    display: block;
+    float:left;
+    color:black;
+    border-right: 1px solid #bbb;
+}
+
+.navElement2 a {
+    display: inline-block;
+
+    /*    background-color: white;*/
+    text-align: center;
+    padding: 14px 16px;
+
+}
+
+
+
+
+
+
+li.dropdown {
+
+    display: none;
+}
+
+
+
+
+
+
+.dropbtn {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.dropdown a{
+    display: inline-block;
+    /*    background-color: white;*/
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none; 
+
+}
+
+.dropdown:hover{
+    background-color: #111;
+    text-decoration: none;
+}
+
+
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: black;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a  {
+    color: red;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {background-color: #111}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+@media only screen and (max-width: 600px) {
+
+
+
+    li.dropdown {
+
+        display: inline-block;
+        float:left;
+        border-right: 1px solid #bbb;
+    }
+
+    li.navElement2{
+
+        display: none;
+        float:left;
+        border-right: 1px solid #bbb;
+    }
+
+
+}

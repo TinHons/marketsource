@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+
+
+    <body>
+
+        <ui:composition template="./Template1.xhtml">
+
+            <ui:define name="top">
+                top
+            </ui:define>
+
+            <ui:define name="content">
+                <h:form>
+                    <h1>Investor Board Information</h1>
+                    <h4>Board Name</h4>
+                    <hr/>
+                    <p>
+
+                        <h:outputText value="#{editBoardBean.companyName}" />
+                        
+                    </p>
+                    <hr/>
+                    <h4>Peers</h4>
+                    <hr/>
+                    <p>
+                        <h:outputText value="Add New Peer"></h:outputText>
+                        
+                        <p class="field_paragraph">
+                            <h:selectOneMenu  id="select_menu"
+                                              value="#{editBoardBean.selectedZseCompany}"
+                                              title="Your response">
+                                <f:selectItems value="#{editBoardBean.zseCompaniesList}"
+                                               var="company"
+                                               itemValue="#{company}"
+                                               itemLabel="#{company.companyName}" />
+                            </h:selectOneMenu>
+                        </p>
+                        <h:message for="select_menu" style="color:red" />
+                    </p>
+                    
+                    <hr/>
+                    
+
+                    
+                    <hr/>
+                    
+
+                    
+
+
+                    <br/>
+                    <p class="submit_paragraph">
+                        <h:commandButton class="submit_button" action="#{editBoardBean.updatePeers()}"
+                                         value="Submit" />
+                    </p>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="bottom">
+                bottom
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

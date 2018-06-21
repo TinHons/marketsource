@@ -1,0 +1,254 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:metadata>
+
+        <f:viewAction action="#{queryManagedBean.retrieveDailyTrades(queryManagedBean.selectedDate)}" onPostback="true"/>
+        <f:viewAction action="#{queryManagedBean.retrieveDailyIndices(queryManagedBean.selectedDate)}" onPostback="true"/>
+    </f:metadata>
+
+    <body>
+
+        <ui:composition template="./Template1.xhtml">
+
+            <ui:define name="top">
+                top
+            </ui:define>
+
+            <ui:define name="head-meta">
+                <meta name="description" content="Get the latest Zimbabwe Stock Exchange share prices and trends."></meta>
+            </ui:define>
+
+            <ui:define name="title">FinZim | Zimbabwe Stock Exchange Share Prices</ui:define>
+
+            <ui:define name="content">
+                
+                <div class="main">
+                    <div id="advert">
+                    <h:graphicImage  library="images" name="advertisehere.jpg" width="100%" height="30" style="display:inline-block;max-width:100%;height:auto;"/>
+                </div>
+                <h1>Zimbabwe Stock Exchange</h1>
+                <hr/>
+                  <h:form id="dateForm">
+                    <p:growl id="msgs" showDetail="true" />
+                    <p>Showing data for date indicated. Select a different date by clicking in the field below and then clicking the submit button.</p>
+                    <table id="t01" class="center">
+
+                        <tr>
+                            <td>
+                                <p:outputLabel for="popup" value="Select Date(mm/dd/yy):" />
+                                <p:calendar id="popup" value="#{queryManagedBean.selectedDate}" />
+                                <p:commandButton class="submitButton" value="Submit" update="tradesTable, indicesForm" actionListener="#{queryManagedBean.onDateButtonClick()}"  icon="ui-icon-check" /></td>
+                        </tr>
+                    </table>
+
+
+
+
+
+
+
+
+                </h:form>
+                <hr/>
+                <h4>MARKET INDICES</h4>
+                <br/>
+
+                <h:form id="indicesForm">
+
+                    <h:panelGrid  class="indicesTable" columns="4" id="indicesSummaryTable">
+
+
+                        <h:link class="indicesTableLinks" value="Industrial Index" outcome="indicesChart" includeViewParams="true">
+                            <f:param name="index" value="industrialIndex"/>
+
+                        </h:link>
+
+                        <h:outputText value="#{queryManagedBean.dailyIndices.industrialIndex}"/>
+                        <h:outputLabel rendered="#{styleBean.showUpArrow(queryManagedBean.dailyIndices.industrialDirectionIndicator)}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.industrialDirectionIndicator)}"><i class="fa fa-arrow-up"></i></h:outputLabel>
+                        <h:outputLabel rendered="#{styleBean.showDownArrow(queryManagedBean.dailyIndices.industrialDirectionIndicator)}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.industrialDirectionIndicator)}"><i class="fa fa-arrow-down"></i></h:outputLabel>
+                        <h:outputLabel rendered="#{styleBean.showSquareIcon(queryManagedBean.dailyIndices.industrialDirectionIndicator)}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.industrialDirectionIndicator)}"><i class="fa fa-stop custom"></i></h:outputLabel>
+                        <h:outputText id="industrialChange" value="#{queryManagedBean.dailyIndices.industrialIndexChange}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.industrialDirectionIndicator)}"><f:convertNumber pattern="##0.00'%'" /></h:outputText>
+                        
+                        
+                        <h:link class="indicesTableLinks" value="Mining Index" outcome="indicesChart" includeViewParams="true">
+                            <f:param name="index" value="miningIndex"/>
+
+                        </h:link>
+
+                        <h:outputText value="#{queryManagedBean.dailyIndices.miningIndex}"/> 
+                        <h:outputLabel rendered="#{styleBean.showUpArrow(queryManagedBean.dailyIndices.miningDirectionIndicator)}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.miningDirectionIndicator)}"><i class="fa fa-arrow-up"></i></h:outputLabel>
+                        <h:outputLabel rendered="#{styleBean.showDownArrow(queryManagedBean.dailyIndices.miningDirectionIndicator)}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.miningDirectionIndicator)}"><i class="fa fa-arrow-down"></i></h:outputLabel>
+                        <h:outputLabel rendered="#{styleBean.showSquareIcon(queryManagedBean.dailyIndices.miningDirectionIndicator)}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.miningDirectionIndicator)}"><i class="fa fa-stop custom"></i></h:outputLabel>
+                        <h:outputText value="#{queryManagedBean.dailyIndices.miningIndexChange}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.miningDirectionIndicator)}"><f:convertNumber pattern="##0.00'%'" /> </h:outputText>
+                        
+                        
+                        
+                        
+                        <h:link class="indicesTableLinks" value="All Share Index" outcome="indicesChart" includeViewParams="true">
+                            <f:param name="index" value="allShareIndex"/>
+
+                        </h:link>
+
+                        <h:outputText value="#{queryManagedBean.dailyIndices.allShareIndex}"/>
+                        <h:outputLabel rendered="#{styleBean.showUpArrow(queryManagedBean.dailyIndices.allShareDirectionIndicator)}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.allShareDirectionIndicator)}"><i class="fa fa-arrow-up"></i></h:outputLabel>
+                        <h:outputLabel rendered="#{styleBean.showDownArrow(queryManagedBean.dailyIndices.allShareDirectionIndicator)}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.allShareDirectionIndicator)}"><i class="fa fa-arrow-down"></i></h:outputLabel>
+                        <h:outputLabel rendered="#{styleBean.showSquareIcon(queryManagedBean.dailyIndices.allShareDirectionIndicator)}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.allShareDirectionIndicator)}"><i class="fa fa-stop custom"></i></h:outputLabel>
+                        <h:outputText id="allShareChange" value="#{queryManagedBean.dailyIndices.allShareIndexChange}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.allShareDirectionIndicator)}"><f:convertNumber pattern="##0.00'%'" /></h:outputText>
+                        
+                        
+                        <h:link class="indicesTableLinks" value="Top 10 Index" outcome="indicesChart" includeViewParams="true">
+                            <f:param name="index" value="top10Index"/>
+
+                        </h:link>
+
+                        <h:outputText value="#{queryManagedBean.dailyIndices.top10Index}"/>
+                        <h:outputLabel rendered="#{styleBean.showUpArrow(queryManagedBean.dailyIndices.top10DirectionIndicator)}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.top10DirectionIndicator)}"><i class="fa fa-arrow-up"></i></h:outputLabel>
+                        <h:outputLabel rendered="#{styleBean.showDownArrow(queryManagedBean.dailyIndices.top10DirectionIndicator)}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.top10DirectionIndicator)}"><i class="fa fa-arrow-down"></i></h:outputLabel>
+                        <h:outputLabel rendered="#{styleBean.showSquareIcon(queryManagedBean.dailyIndices.top10DirectionIndicator)}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.top10DirectionIndicator)}"><i class="fa fa-stop custom"></i></h:outputLabel>
+                        <h:outputText id="top10Change" value="#{queryManagedBean.dailyIndices.top10IndexChange}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.top10DirectionIndicator)}"><f:convertNumber pattern="##0.00'%'" /></h:outputText>
+                        
+                        
+                    </h:panelGrid>  
+
+
+
+                </h:form>
+
+
+                <br/>
+                <hr/>
+                <h4>SHARE PRICES</h4>
+                <br/>
+
+                <br/>
+                <h:form id="tradesTable">
+                    <h:dataTable class="tables sharePriceTable" id="priceSheetTable" var="trade"
+                                 summary="List of all responses for Event"
+                                 value="#{queryManagedBean.priceSheetTradeList}">
+
+                        <h:column>
+                            <!--                        <f:facet name="header">
+                                                        <h:outputText value="Date Posted" />
+                                                    </f:facet>-->
+                            <f:facet name="header">Company</f:facet>
+
+
+                            <h:link class="sharePriceTableLinks" value="#{trade.company.companyName}" outcome="chartView" includeViewParams="true">
+                                <f:param name="company" value="#{trade.company}"/>
+
+                            </h:link>
+
+
+                        </h:column>
+
+                        <h:column>
+                            <!--                        <f:facet name="header">
+                                                        <h:outputText value="Advert" />
+                                                    </f:facet>-->
+
+
+                            <f:facet name="header">Closing Price</f:facet>
+                            <h:outputText value="#{trade.closingPrice}" />
+
+
+
+
+
+                        </h:column>
+                        <h:column>
+                            <h:outputLabel rendered="#{styleBean.showUpArrow(trade.directionIndicator)}" style="color:#{styleBean.getShareChangeColor(trade.directionIndicator)}"><i class="fa fa-arrow-up"></i></h:outputLabel>
+                            <h:outputLabel rendered="#{styleBean.showDownArrow(trade.directionIndicator)}" style="color:#{styleBean.getShareChangeColor(trade.directionIndicator)}"><i class="fa fa-arrow-down"></i></h:outputLabel>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">Price Change</f:facet>   
+
+                            <h:outputText value="#{trade.change}" style="color:#{styleBean.getShareChangeColor(trade.directionIndicator)}"> <f:convertNumber pattern="##0.00'%'" /></h:outputText>  
+
+
+
+                        </h:column>
+
+
+
+                        <h:column>
+                            <!--                        <f:facet name="header">
+                                                        <h:outputText value="Advert" />
+                                                    </f:facet>-->
+
+
+                            <f:facet name="header">Total Shares Traded</f:facet>
+                            <h:outputText value="#{trade.totalSharesTraded}" />
+
+
+
+
+
+                        </h:column>
+                        <h:column>
+                            <!--                        <f:facet name="header">
+                                                        <h:outputText value="Advert" />
+                                                    </f:facet>-->
+
+
+                            <f:facet name="header">Total Value Traded</f:facet>
+                            <h:outputText value="#{trade.totalValueTraded}" />
+
+
+
+
+
+                        </h:column>
+
+
+                    </h:dataTable>
+                </h:form>
+                </div>
+                <div class="sidesection">
+                    
+                    <h:outputText value="ZSE Top Gainers"></h:outputText>
+                    <br/>
+                    <br/>
+                    <h:dataTable class="topGainersTable" id="topGainers" var="trade"
+                                 summary="List of all responses for Event"
+                                 value="#{queryManagedBean.topGainersList}">
+
+                        <h:column>
+                            <h:link class="sharePriceTableLinks" value="#{trade.company.companyName}" outcome="chartView" includeViewParams="true">
+                                <f:param name="company" value="#{trade.company}"/>
+                            </h:link>
+                        </h:column>
+
+                        <h:column>
+                            <h:outputText value="#{trade.closingPrice}" />
+                        </h:column>
+                        <h:column>
+                            <h:outputLabel rendered="#{styleBean.showUpArrow(trade.directionIndicator)}" style="color:#{styleBean.getShareChangeColor(trade.directionIndicator)}"><i class="fa fa-arrow-up"></i></h:outputLabel>
+                            <h:outputLabel rendered="#{styleBean.showDownArrow(trade.directionIndicator)}" style="color:#{styleBean.getShareChangeColor(trade.directionIndicator)}"><i class="fa fa-arrow-down"></i></h:outputLabel>
+                        </h:column>
+
+                        <h:column>
+           
+                            <h:outputText value="#{trade.change}" style="color:#{styleBean.getShareChangeColor(trade.directionIndicator)}"> <f:convertNumber pattern="##0.00'%'" /></h:outputText>  
+
+                        </h:column>
+                    </h:dataTable>
+                    
+                </div>
+                 <hr style="clear: left;"/>
+            </ui:define>
+
+            <ui:define name="bottom">
+                bottom
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

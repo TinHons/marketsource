@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <meta name="viewport" content='width=540'/>
+
+    <h:head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async="async" src="https://www.googletagmanager.com/gtag/js?id=UA-119995837-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'UA-119995837-1');
+        </script>
+
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <ui:insert name="head-meta" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <!--        <title>FinZim | Zimbabwe Business News and Information</title>-->
+        <title><ui:insert name="title">FinZim</ui:insert></title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+        <script async="async" src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({
+                google_ad_client: "ca-pub-5242700242961460",
+                enable_page_level_ads: true
+            });
+        </script>
+
+    </h:head>
+
+    <h:body>
+        <h:outputScript library="jqplot-plugin" name="jqplot.canvasOverlay.min.js" target="head" />
+        <h:outputScript  name="js/chartExtender.js" target="head" />
+        <h:outputScript  name="js/ext.js" target="head" />
+
+        <div id="fb-root"></div>
+        <script>(function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id))
+                    return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&amp;version=v2.11&amp;appId=952663958147772';
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
+        <div id="top">
+
+            <ul class="navList">
+                <li class="navElement"> <h:graphicImage  id="logo" library="images" name="FinZim3.png" width="100" height="30" style="display:inline-block;max-width:100%;height:auto;"/></li>
+
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">Menu</a>
+                    <div class="dropdown-content">
+                        <h:link outcome="stocks" value="Stocks" />
+                        <h:form><h:link value="Currencies" outcome="currencies" includeViewParams="true">
+
+
+                            </h:link></h:form>
+                        <h:form> <h:link value="Companies" outcome="companies" includeViewParams="true">
+
+
+                            </h:link></h:form>
+                        <h:link outcome="people" value="People" />
+                        <h:outputLink class="navElement" value="http://zimstore.com" >Classifieds</h:outputLink>
+                    </div>
+                </li>
+                <li class="navElement"><h:link outcome="index" value="Home" /></li>
+
+                <li class="navElement2"><h:link class="navElement" outcome="stocks" value="Stocks" /></li>
+                <li class="navElement2"><h:form><h:link class="navElement" value="Currencies" outcome="currencies" includeViewParams="true">
+
+
+                        </h:link></h:form></li>
+
+                <li class="navElement2"> <h:form>
+
+
+                        <h:link class="navElement" value="Companies" outcome="companies" includeViewParams="true">
+
+
+                        </h:link>
+
+                    </h:form></li>
+
+                <li class="navElement2"><h:link class="navElement" outcome="people" value="People" /></li>
+
+                <li class="navElement2"><h:outputLink class="navElement" value="http://zimstore.com" >Classifieds</h:outputLink></li>
+
+
+            </ul>
+
+
+
+
+
+
+
+
+
+        </div>
+
+        <div id="content" class="center_content">
+            <ui:insert name="content">Content</ui:insert>
+        </div>
+
+        <div id="bottom">
+            <h:panelGrid  columns="3" id="aboutUsTable">
+
+
+                <h:link outcome="contact" value="Contact Us" />
+
+                <h:link outcome="terms" value="Terms of Use" />
+                <h:link outcome="silicon" value="Website Design" />
+
+
+
+            </h:panelGrid>
+        </div>
+
+    </h:body>
+
+</html>

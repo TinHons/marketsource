@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <body>
+
+        <ui:composition template="./Template1.xhtml">
+
+            <ui:define name="left">
+                left
+            </ui:define>
+
+            <ui:define name="right">
+                right
+            </ui:define>
+
+            <ui:define name="content">
+                <p>Enter profile details below.</p>
+                <br></br>
+                <h:form>
+
+
+
+
+
+
+
+
+
+
+
+
+                    <p class="field_paragraph">
+                        <p:inputText class="fields" id="title" value="#{createPositionsBean.title}"  pt:placeholder="Title" />
+                    </p>
+                    <h:message for="title" style="color:red" />
+
+                    <p class="field_paragraph">
+                        <h:selectOneMenu  styleClass="dropdown_menu1" id="personselector"
+                                          value="#{createPositionsBean.person}"
+                                          title="Your response">
+                            <f:selectItems value="#{createPositionsBean.personsList}"
+                                           var="person"
+                                           itemValue="#{person}"
+                                           itemLabel="#{person.surname} #{person.firstName}" />
+                        </h:selectOneMenu>
+                    </p>
+                    <h:message for="personselector" style="color:red" />
+
+
+
+
+
+
+
+                    <p class="field_paragraph">
+                        <h:selectOneMenu  id="profile_menu"
+                                          value="#{createPositionsBean.profile}"
+                                          title="Your response">
+                            <f:selectItems value="#{createPositionsBean.profileList}"
+                                           var="profile"
+                                           itemValue="#{profile}"
+                                           itemLabel="#{profile.name}" />
+                        </h:selectOneMenu>
+                    </p>
+                    <h:message for="profile_menu" style="color:red" />
+
+                    <br></br>
+                    <p class="submit_paragraph">
+                        <h:commandButton class="submit_button" action="#{createPositionsBean.createPosition()}"
+                                         value="Submit" />
+                    </p>
+                    <p id="textOutput">Text: #{createPositionsBean.result}</p>
+                    <br/>
+
+                </h:form>
+                <br />
+                <h:link outcome="index"
+                        value="Back to the main page." />
+            </ui:define>
+
+            <ui:define name="bottom">
+                bottom
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
+

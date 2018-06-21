@@ -1,0 +1,225 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      >
+
+    <f:metadata>
+
+        <f:viewAction action="#{queryManagedBean.retrieveDailyTrades(queryManagedBean.selectedDate)}" onPostback="true"/>
+        <f:viewAction action="#{queryManagedBean.retrieveDailyIndices(queryManagedBean.selectedDate)}" onPostback="true"/>
+        <f:viewAction action="#{currenciesUpdateBean.retrieveLatestRates()}"  onPostback="true"/>
+        <f:viewAction action="#{newsBean.retrieveNews()}" onPostback="true"/>
+    </f:metadata>
+
+    <body>
+
+        <ui:composition template="./Template1.xhtml">
+
+            <ui:define name="top">
+                top
+            </ui:define>
+
+            <ui:define name="head-meta">
+                <meta name="description" content="FinZim provides up-to-date Zimbabwe business news and information. Get news, Zimbabwe Stock Exchange share prices, currency exchange rates and other business information."></meta>
+            </ui:define>
+
+            <ui:define name="title">FinZim | Zimbabwe Business News and Information</ui:define>
+
+            <ui:define name="content" >
+                <div class="main">
+                    <h4>NEWS</h4>
+                    <br/>  
+
+                    <h:form id="topNewsForm">
+
+
+                        <h:link class="headline" value="#{newsBean.headline.title}" outcome="showArticle" includeViewParams="true">
+                            <f:param name="articleId" value="#{newsBean.headline.recordId}"/>
+                        </h:link>
+                        <br></br>
+
+                        <h:graphicImage  id="current1" value="image/#{newsBean.headlineImage}" alt="Headline Image" style="display:block;width:100%;height:auto;margin:0px;"/>
+                        <p><h:outputText class="articleCaption" value="#{newsBean.headline.caption}"/> </p>
+
+                        <hr/>
+                        <h:dataTable class="articleHeadingsTable" id="topNewsTable" var="article"
+                                     summary="List of all responses for Event"
+                                     value="#{newsBean.topNews}">
+
+                            <h:column>
+                                <h:link class="topNewsHeading" value="#{article.title}" outcome="showArticle" includeViewParams="true">
+                                    <f:param name="articleId" value="#{article.recordId}"/>
+                                </h:link>
+                                <br/>
+                                <br/>
+                                <div> <h:graphicImage  id="current1"  value="image/#{article.recordId}_image_1.jpg"  style="display:block;max-width:100%;width:30%;height:auto;padding-right: 6px;float:left;"/>
+                                    <h:outputText class="articleCaption" value="#{article.caption}"/>
+                                    <br/>
+                                    <br/>
+                                    <h:outputText value="#{article.creationDateTime}" ><f:convertDateTime type="date" dateStyle="full" /></h:outputText>
+                                </div>
+                                
+                                <br style="clear:left;"/>
+                                <hr style="clear:left;"/>
+                            </h:column>
+
+                        </h:dataTable>
+                    </h:form>  
+
+                    <hr/>
+                    <h4>MARKETS</h4>
+                    <br/>
+                    <h5>ZIMBABWE STOCK EXCHANGE</h5>
+
+                    <p>Market indices data at the close of trading on <h:outputText value="#{queryManagedBean.selectedDate}" ></h:outputText>.</p>
+
+                    <h:form id="indicesForm">
+
+                        <h:panelGrid  class="indicesTable" columns="4" id="indicesSummaryTable">
+
+
+                            <h:link class="indicesTableLinks" value="Industrial Index" outcome="indicesChart" includeViewParams="true">
+                                <f:param name="index" value="industrialIndex"/>
+
+                            </h:link>
+
+                            <h:outputText value="#{queryManagedBean.dailyIndices.industrialIndex}"/>
+                            <h:outputLabel rendered="#{styleBean.showUpArrow(queryManagedBean.dailyIndices.industrialDirectionIndicator)}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.industrialDirectionIndicator)}"><i class="fa fa-arrow-up"></i></h:outputLabel>
+                            <h:outputLabel rendered="#{styleBean.showDownArrow(queryManagedBean.dailyIndices.industrialDirectionIndicator)}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.industrialDirectionIndicator)}"><i class="fa fa-arrow-down"></i></h:outputLabel>
+                            <h:outputLabel rendered="#{styleBean.showSquareIcon(queryManagedBean.dailyIndices.industrialDirectionIndicator)}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.industrialDirectionIndicator)}"><i class="fa fa-stop custom"></i></h:outputLabel>
+                            <h:outputText id="industrialChange" value="#{queryManagedBean.dailyIndices.industrialIndexChange}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.industrialDirectionIndicator)}"><f:convertNumber pattern="##0.00'%'" /></h:outputText>
+
+
+                            <h:link class="indicesTableLinks" value="Mining Index" outcome="indicesChart" includeViewParams="true">
+                                <f:param name="index" value="miningIndex"/>
+
+                            </h:link>
+
+                            <h:outputText value="#{queryManagedBean.dailyIndices.miningIndex}"/> 
+                            <h:outputLabel rendered="#{styleBean.showUpArrow(queryManagedBean.dailyIndices.miningDirectionIndicator)}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.miningDirectionIndicator)}"><i class="fa fa-arrow-up"></i></h:outputLabel>
+                            <h:outputLabel rendered="#{styleBean.showDownArrow(queryManagedBean.dailyIndices.miningDirectionIndicator)}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.miningDirectionIndicator)}"><i class="fa fa-arrow-down"></i></h:outputLabel>
+                            <h:outputLabel rendered="#{styleBean.showSquareIcon(queryManagedBean.dailyIndices.miningDirectionIndicator)}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.miningDirectionIndicator)}"><i class="fa fa-stop custom"></i></h:outputLabel>
+                            <h:outputText value="#{queryManagedBean.dailyIndices.miningIndexChange}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.miningDirectionIndicator)}"><f:convertNumber pattern="##0.00'%'" /> </h:outputText>
+
+
+
+
+                            <h:link class="indicesTableLinks" value="All Share Index" outcome="indicesChart" includeViewParams="true">
+                                <f:param name="index" value="allShareIndex"/>
+
+                            </h:link>
+
+                            <h:outputText value="#{queryManagedBean.dailyIndices.allShareIndex}"/>
+                            <h:outputLabel rendered="#{styleBean.showUpArrow(queryManagedBean.dailyIndices.allShareDirectionIndicator)}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.allShareDirectionIndicator)}"><i class="fa fa-arrow-up"></i></h:outputLabel>
+                            <h:outputLabel rendered="#{styleBean.showDownArrow(queryManagedBean.dailyIndices.allShareDirectionIndicator)}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.allShareDirectionIndicator)}"><i class="fa fa-arrow-down"></i></h:outputLabel>
+                            <h:outputLabel rendered="#{styleBean.showSquareIcon(queryManagedBean.dailyIndices.allShareDirectionIndicator)}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.allShareDirectionIndicator)}"><i class="fa fa-stop custom"></i></h:outputLabel>
+                            <h:outputText id="allShareChange" value="#{queryManagedBean.dailyIndices.allShareIndexChange}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.allShareDirectionIndicator)}"><f:convertNumber pattern="##0.00'%'" /></h:outputText>
+
+
+                            <h:link class="indicesTableLinks" value="Top 10 Index" outcome="indicesChart" includeViewParams="true">
+                                <f:param name="index" value="top10Index"/>
+
+                            </h:link>
+
+                            <h:outputText value="#{queryManagedBean.dailyIndices.top10Index}"/>
+                            <h:outputLabel rendered="#{styleBean.showUpArrow(queryManagedBean.dailyIndices.top10DirectionIndicator)}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.top10DirectionIndicator)}"><i class="fa fa-arrow-up"></i></h:outputLabel>
+                            <h:outputLabel rendered="#{styleBean.showDownArrow(queryManagedBean.dailyIndices.top10DirectionIndicator)}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.top10DirectionIndicator)}"><i class="fa fa-arrow-down"></i></h:outputLabel>
+                            <h:outputLabel rendered="#{styleBean.showSquareIcon(queryManagedBean.dailyIndices.top10DirectionIndicator)}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.top10DirectionIndicator)}"><i class="fa fa-stop custom"></i></h:outputLabel>
+                            <h:outputText id="top10Change" value="#{queryManagedBean.dailyIndices.top10IndexChange}" style="color:#{styleBean.getShareChangeColor(queryManagedBean.dailyIndices.top10DirectionIndicator)}"><f:convertNumber pattern="##0.00'%'" /></h:outputText>
+
+
+                        </h:panelGrid>  
+
+
+
+                    </h:form>
+
+                    <br/>
+
+                    <h:link value="View More Stocks Data" outcome="stocks" >                            
+                    </h:link>
+
+
+
+
+                </div>
+                <div class="sidesection">
+
+                    <h:outputText value="ZSE Top Gainers"></h:outputText>
+                    <br/>
+                    <br/>
+                    <h:dataTable class="topGainersTable" id="topGainers" var="trade"
+                                 summary="List of all responses for Event"
+                                 value="#{queryManagedBean.topGainersList}">
+
+                        <h:column>
+                            <h:link value="#{trade.company.companyName}" outcome="chartView" includeViewParams="true">
+                                <f:param name="company" value="#{trade.company}"/>
+                            </h:link>
+                        </h:column>
+
+                        <h:column>
+                            <h:outputText value="#{trade.closingPrice}" />
+                        </h:column>
+                        <h:column>
+                            <h:outputLabel rendered="#{styleBean.showUpArrow(trade.directionIndicator)}" style="color:#{styleBean.getShareChangeColor(trade.directionIndicator)}"><i class="fa fa-arrow-up"></i></h:outputLabel>
+                            <h:outputLabel rendered="#{styleBean.showDownArrow(trade.directionIndicator)}" style="color:#{styleBean.getShareChangeColor(trade.directionIndicator)}"><i class="fa fa-arrow-down"></i></h:outputLabel>
+                        </h:column>
+
+                        <h:column>
+
+                            <h:outputText value="#{trade.change}" style="color:#{styleBean.getShareChangeColor(trade.directionIndicator)}"> <f:convertNumber pattern="##0.00'%'" /></h:outputText>  
+
+                        </h:column>
+                    </h:dataTable>
+                    <br/>
+                    <h:link value="View More Stocks Data" outcome="stocks" >                            
+                    </h:link>
+                    <br/>
+                    <br/>
+                    <hr/>
+                    <br/>
+                    <h:link value="Currencies" outcome="currencies" includeViewParams="true">
+                    </h:link>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <h:outputText value="*Currencies based to the USD i.e $1 buys"></h:outputText>
+                    <br/>
+                    <br/>
+                    <h:dataTable class="tables majorCurrenciesTable" id="majorcurrencies" var="currency1"
+                                 summary="List of all responses for Event"
+                                 value="#{currenciesUpdateBean.majorCurrencyList}">
+                        <h:column>
+
+                            <h:outputText value="#{currency1.name}" />
+                        </h:column>
+                        <h:column>
+
+                            <h:outputText value="#{currency1.code}" />
+                        </h:column>
+
+
+
+                        <h:column>
+
+                            <h:outputText value="#{currency1.rate}" />
+
+                        </h:column>
+
+                    </h:dataTable>
+                </div>
+                <hr style="clear: left;"/>
+            </ui:define>
+
+            <ui:define name="bottom">
+                bottom
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

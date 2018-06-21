@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:metadata>
+
+        <f:viewAction action="#{manageArticlesBean.retrieveArticles()}" onPostback="true"/>
+        <f:viewAction action="#{manageArticlesBean.retrieveSelectedArticles(manageArticlesBean.selectedCartegory)}" onPostback="true"/>
+    </f:metadata>
+
+    <body>
+
+        <ui:composition template="./Template1.xhtml">
+
+            <ui:define name="top">
+                top
+            </ui:define>
+
+            <ui:define name="content">
+                <h1>Publish</h1>
+                <hr/>
+                <h:form id="cartegoryForm">
+                    <p:growl id="msgs" showDetail="true" />
+                    <p>Showing articles for cartegory indicated. </p>
+                    <table id="t01">
+
+                        <tr>
+                            <td><p:outputLabel for="selectcart" value="Select Cartegory:" />
+                                <p class="field_paragraph">
+                                    <h:selectOneMenu  styleClass="dropdown_menu1" id="selectcart"
+                                                      value="#{manageArticlesBean.selectedCartegory}"
+                                                      title="Your response">
+                                        <f:selectItems value="#{manageArticlesBean.cartegoryValues}"
+                                                       var="cart"
+                                                       itemValue="#{cart}"
+                                                       itemLabel="#{cart}" />
+                                    </h:selectOneMenu>
+                                </p>
+                                <p:commandButton value="Submit" update="articlesForm" actionListener="#{manageArticlesBean.onDateButtonClick()}"  icon="ui-icon-check" /></td>
+                        </tr>
+                    </table>
+
+                </h:form>
+                <hr/>
+
+
+
+
+
+                
+                <h4>Selected Articles</h4>
+                <br/>
+
+                <br/>
+                <h:form id="articlesForm">
+                    <h:dataTable class="tables" id="articlesTable" var="article"
+                                 summary="List of all responses for Event"
+                                 value="#{manageArticlesBean.selectedArticles}">
+
+                        <h:column>
+                            <!--                        <f:facet name="header">
+                                                        <h:outputText value="Date Posted" />
+                                                    </f:facet>-->
+                            <f:facet name="header">Article</f:facet>
+                            <h:commandLink 
+                                value="#{article.title}"
+                                action="#{manageArticlesBean.retrieveArticleInfo(article)}" />
+                            <p:commandButton id="deletebutton" class="submit_button" actionListener="#{manageArticlesBean.deleteArticle(article)}"
+                                                 value="Delete" />
+                            <h:message for="deletebutton" style="color:red" />
+                        </h:column>
+
+
+
+
+
+
+                    </h:dataTable>
+                </h:form>
+            </ui:define>
+
+            <ui:define name="bottom">
+                bottom
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

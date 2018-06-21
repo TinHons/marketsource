@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:pt="http://xmlns.jcp.org/jsf"
+      xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./Template1.xhtml">
+
+            <ui:define name="top">
+                top
+            </ui:define>
+
+            <ui:define name="content">
+                
+                <h:form>
+                
+                <h:outputLabel value="Company Name: " style="font-weight:bold" />
+                <h:inputText value="#{adminManagedBean.companyName}" />
+                <br></br>
+                <h:outputLabel value="ISIN: " style="font-weight:bold" />
+                <h:inputText value="#{adminManagedBean.ISIN}" />
+                <br></br>
+                <h:outputLabel value="Symbol: " style="font-weight:bold" />
+                <h:inputText value="#{adminManagedBean.symbol}" />
+                <br></br>
+                <h:commandButton action="#{adminManagedBean.addCompany(adminManagedBean.companyName, adminManagedBean.ISIN, adminManagedBean.symbol)}"
+                                   value="Submit" />
+                
+                </h:form>
+                
+            </ui:define>
+
+            <ui:define name="bottom">
+                bottom
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
